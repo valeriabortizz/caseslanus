@@ -70,7 +70,56 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--border);
+  cursor: pointer;
 }
+
+.brand-popover {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: var(--gray-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 30px 24px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  width: min(280px, calc(100vw - 32px));
+}
+
+.brand-popover img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+
+.brand-popover h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.brand-popover p {
+  font-size: 0.8rem;
+  color: var(--gray-3);
+  margin: 0;
+}
+
+.popover-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--gray-3);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.popover-close:hover { color: var(--white); }
 
 .tabs {
   display: flex;
@@ -133,6 +182,7 @@ button { font-family: inherit; cursor: pointer; }
   object-fit: cover;
   border: 1px solid var(--border);
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .eyebrow {

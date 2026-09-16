@@ -7,6 +7,26 @@
   const needButtons = Array.from(document.querySelectorAll(".need-btn"));
   const tabs = Array.from(document.querySelectorAll(".tab"));
   const modelChip = document.getElementById("modelChip");
+  const brandPopover = document.getElementById("brandPopover");
+  const popoverClose = document.getElementById("popoverClose");
+  const logoTriggers = Array.from(document.querySelectorAll(".brand-logo, .gate-logo"));
+
+  logoTriggers.forEach((logo) => {
+    logo.addEventListener("click", (e) => {
+      e.stopPropagation();
+      brandPopover.hidden = !brandPopover.hidden;
+    });
+  });
+
+  popoverClose.addEventListener("click", () => {
+    brandPopover.hidden = true;
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!brandPopover.hidden && !brandPopover.contains(e.target) && !logoTriggers.includes(e.target)) {
+      brandPopover.hidden = true;
+    }
+  });
 
   const MODEL_LABELS = {
     "11": "iPhone 11",
