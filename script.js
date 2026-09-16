@@ -50,18 +50,27 @@
     maximumFractionDigits: 0,
   });
 
+  const MODEL_INDEPENDENT_CATEGORIES = ["accesorios"];
+
   let selectedModel = null;
 
   modelSelect.addEventListener("change", () => {
     selectedModel = modelSelect.value;
-    needButtons.forEach((btn) => (btn.disabled = !selectedModel));
+    needButtons.forEach((btn) => {
+      if (MODEL_INDEPENDENT_CATEGORIES.includes(btn.dataset.target)) return;
+      btn.disabled = !selectedModel;
+    });
   });
 
   needButtons.forEach((btn) => {
+    const target = btn.dataset.target;
+    if (MODEL_INDEPENDENT_CATEGORIES.includes(target)) btn.disabled = false;
+
     btn.addEventListener("click", () => {
-      if (!selectedModel) return;
-      renderCatalog(selectedModel);
-      openCatalog(btn.dataset.target);
+      const isModelIndependent = MODEL_INDEPENDENT_CATEGORIES.includes(target);
+      if (!selectedModel && !isModelIndependent) return;
+      renderCatalog(selectedModel || "otro");
+      openCatalog(target);
     });
   });
 
@@ -84,12 +93,16 @@
       const panel = document.getElementById(category);
       const grid = panel.querySelector("[data-grid]");
       const note = panel.querySelector("[data-note]");
-      const items = PRODUCTS[category].filter(
-        (p) => model === "otro" || p.compat.includes("all") || p.compat.includes(model)
-      );
+      const isModelIndependent = MODEL_INDEPENDENT_CATEGORIES.includes(category);
+      const items = isModelIndependent
+        ? PRODUCTS[category]
+        : PRODUCTS[category].filter(
+            (p) => model === "otro" || p.compat.includes("all") || p.compat.includes(model)
+          );
 
-      note.textContent =
-        model === "otro"
+      note.textContent = isModelIndependent
+        ? "Accesorios para cualquier modelo de iPhone."
+        : model === "otro"
           ? "Mostrando el catálogo completo. Confirmanos tu modelo exacto para asegurar la compatibilidad."
           : `Compatible con ${MODEL_LABELS[model]}`;
 
@@ -126,7 +139,7 @@
     topbar.hidden = false;
     catalog.hidden = false;
     footer.hidden = false;
-    modelChip.textContent = MODEL_LABELS[selectedModel];
+    modelChip.textContent = selectedModel ? MODEL_LABELS[selectedModel] : "Elegir modelo";
     goToPanel(target);
   }
 
