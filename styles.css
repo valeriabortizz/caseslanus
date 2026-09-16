@@ -272,6 +272,25 @@ button { font-family: inherit; cursor: pointer; }
 .need-title { font-weight: 600; font-size: 0.95rem; }
 .need-sub { font-size: 0.78rem; color: var(--gray-3); }
 
+.see-all-btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--gray-4);
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  text-align: center;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.see-all-btn:hover {
+  border-color: var(--white);
+  color: var(--white);
+}
+
 /* ---------- Catalog ---------- */
 
 .panel {

@@ -11,6 +11,7 @@
   const brandBackdrop = document.getElementById("brandBackdrop");
   const popoverClose = document.getElementById("popoverClose");
   const logoTriggers = Array.from(document.querySelectorAll(".brand-logo, .gate-logo"));
+  const seeAllBtn = document.getElementById("seeAllBtn");
 
   function openBrandPopover() {
     brandPopover.hidden = false;
@@ -78,6 +79,11 @@
     tab.addEventListener("click", () => {
       goToPanel(tab.dataset.target);
     });
+  });
+
+  seeAllBtn.addEventListener("click", () => {
+    renderCatalog(selectedModel || "otro");
+    openCatalog("cargadores");
   });
 
   modelChip.addEventListener("click", () => {
