@@ -58,6 +58,20 @@ button { font-family: inherit; cursor: pointer; }
 
 .brand-dot { color: var(--gray-3); }
 
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
 .tabs {
   display: flex;
   gap: 4px;
@@ -110,6 +124,15 @@ button { font-family: inherit; cursor: pointer; }
 .gate-inner {
   max-width: 520px;
   width: 100%;
+}
+
+.gate-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
 }
 
 .eyebrow {
