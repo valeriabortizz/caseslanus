@@ -8,7 +8,7 @@ const PRODUCTS = {
 
   cargadores: [
     {
-      title: "Combo cargador 20W + cable + AirPods",
+      title: "Cargador 20W + cable + auriculares (combo)",
       compat: ["all"],
       price: 17000,
       image: "assets/cargadores/combo-cargador-airpods.jpg",
