@@ -8,25 +8,30 @@
   const tabs = Array.from(document.querySelectorAll(".tab"));
   const modelChip = document.getElementById("modelChip");
   const brandPopover = document.getElementById("brandPopover");
+  const brandBackdrop = document.getElementById("brandBackdrop");
   const popoverClose = document.getElementById("popoverClose");
   const logoTriggers = Array.from(document.querySelectorAll(".brand-logo, .gate-logo"));
+
+  function openBrandPopover() {
+    brandPopover.hidden = false;
+    brandBackdrop.hidden = false;
+  }
+
+  function closeBrandPopover() {
+    brandPopover.hidden = true;
+    brandBackdrop.hidden = true;
+  }
 
   logoTriggers.forEach((logo) => {
     logo.addEventListener("click", (e) => {
       e.stopPropagation();
-      brandPopover.hidden = !brandPopover.hidden;
+      if (brandPopover.hidden) openBrandPopover();
+      else closeBrandPopover();
     });
   });
 
-  popoverClose.addEventListener("click", () => {
-    brandPopover.hidden = true;
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!brandPopover.hidden && !brandPopover.contains(e.target) && !logoTriggers.includes(e.target)) {
-      brandPopover.hidden = true;
-    }
-  });
+  popoverClose.addEventListener("click", closeBrandPopover);
+  brandBackdrop.addEventListener("click", closeBrandPopover);
 
   const MODEL_LABELS = {
     "11": "iPhone 11",
