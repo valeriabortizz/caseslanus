@@ -365,6 +365,35 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--gray-3);
 }
 
+.card-flag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.card-flag.ok {
+  background: var(--white);
+  color: var(--black);
+}
+
+.card-flag.warn {
+  background: transparent;
+  color: var(--gray-3);
+  border: 1px solid var(--border);
+}
+
+.card-incompatible {
+  opacity: 0.55;
+}
+
+.card-incompatible:hover {
+  opacity: 0.9;
+}
+
 .empty-state {
   color: var(--gray-3);
   font-size: 0.9rem;

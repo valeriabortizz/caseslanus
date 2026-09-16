@@ -94,40 +94,44 @@
       const grid = panel.querySelector("[data-grid]");
       const note = panel.querySelector("[data-note]");
       const isModelIndependent = MODEL_INDEPENDENT_CATEGORIES.includes(category);
-      const items = isModelIndependent
-        ? PRODUCTS[category]
-        : PRODUCTS[category].filter(
-            (p) => model === "otro" || p.compat.includes("all") || p.compat.includes(model)
-          );
+      const items = PRODUCTS[category];
 
       note.textContent = isModelIndependent
         ? "Accesorios para cualquier modelo de iPhone."
         : model === "otro"
           ? "Mostrando el catálogo completo. Confirmanos tu modelo exacto para asegurar la compatibilidad."
-          : `Compatible con ${MODEL_LABELS[model]}`;
+          : `Te marcamos qué es compatible con ${MODEL_LABELS[model]} — igual podés ver todo el catálogo.`;
 
       grid.innerHTML = "";
 
       if (items.length === 0) {
         const empty = document.createElement("p");
         empty.className = "empty-state";
-        empty.textContent = "Todavía no tenemos productos cargados para este modelo en esta categoría.";
+        empty.textContent = "Todavía no tenemos productos cargados en esta categoría.";
         grid.appendChild(empty);
         return;
       }
 
       items.forEach((item) => {
+        const isCompatible =
+          isModelIndependent || model === "otro" || item.compat.includes("all") || item.compat.includes(model);
         const card = document.createElement("article");
-        card.className = "card";
+        card.className = "card" + (isCompatible ? "" : " card-incompatible");
         const thumb = item.image
           ? `<img src="${item.image}" alt="${item.title}">`
           : item.icon || "";
+        const flag = isModelIndependent
+          ? ""
+          : isCompatible
+            ? `<div class="card-flag ok">✔ Compatible con tu iPhone</div>`
+            : `<div class="card-flag warn">⚠ No es para tu iPhone</div>`;
         card.innerHTML = `
           <div class="card-thumb${item.image ? " has-image" : ""}">${thumb}</div>
           <div class="card-title">${item.title}</div>
           <div class="card-compat">${item.compat.includes("all") ? "Todos los modelos" : item.compat.map((m) => "iPhone " + m).join(" / ")}</div>
           <div class="card-price">${currency.format(item.price)}</div>
           ${item.note ? `<div class="card-note">${item.note}</div>` : ""}
+          ${flag}
         `;
         grid.appendChild(card);
       });
