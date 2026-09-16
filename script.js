@@ -15,6 +15,7 @@
     "14": "iPhone 14",
     "15": "iPhone 15",
     "16": "iPhone 16",
+    "17": "iPhone 17",
     otro: "Otro modelo",
   };
 
@@ -80,11 +81,15 @@
       items.forEach((item) => {
         const card = document.createElement("article");
         card.className = "card";
+        const thumb = item.image
+          ? `<img src="${item.image}" alt="${item.title}">`
+          : item.icon || "";
         card.innerHTML = `
-          <div class="card-thumb">${item.icon}</div>
+          <div class="card-thumb${item.image ? " has-image" : ""}">${thumb}</div>
           <div class="card-title">${item.title}</div>
           <div class="card-compat">${item.compat.includes("all") ? "Todos los modelos" : item.compat.map((m) => "iPhone " + m).join(" / ")}</div>
           <div class="card-price">${currency.format(item.price)}</div>
+          ${item.note ? `<div class="card-note">${item.note}</div>` : ""}
         `;
         grid.appendChild(card);
       });
